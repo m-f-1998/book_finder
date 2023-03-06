@@ -144,22 +144,19 @@ class _SearchState extends State<SearchAPI> {
   onSearchTextChanged(String search) async {
     _searchResult.clear();
     setState(() {});
-    if (search != "") {
+    if (!RegExp(r'^[a-zA-Z0-9 ]+$').hasMatch(search)) {
+      // For Simplicity Sake, No Special Characters
+      _invalid = true;
+    } else if (search != "") {
       _loading = true;
+      _invalid = false;
       _debouncer.run(() => {
             // Wait Until User Stops Typing for 2 Seconds Then Search
             if (search.isNotEmpty)
               {
-                if (RegExp(r'^[a-zA-Z0-9 ]+$').hasMatch(
-                    search)) // For Simplicity Sake, No Special Characters
-                  {
-                    _invalid = false,
-                    getAPI(search).asStream().listen((event) {
-                      _loading = false;
-                    })
-                  }
-                else
-                  {_invalid = true, _loading = false}
+                getAPI(search).asStream().listen((event) {
+                  _loading = false;
+                })
               } // If 'search' is empty then results already cleared
           });
     }

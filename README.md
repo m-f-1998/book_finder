@@ -10,3 +10,9 @@
 - Handling Descriptions
 - Enviroment Files
 - Safe Error Handling
+
+[invalid-character](previews/invalid-character.png)
+[loading](previews/loading.png)
+[no_results](previews/no_results.png)
+[search_empty](previews/search_empty.png)
+[valid_search](previews/valid_search.png)
